@@ -1,0 +1,25 @@
+{
+  "tt": "yy",
+  "sys": {
+    "t1": "Super admin",
+    "t2": "Night",
+    "t3": "Day",
+    "t4": "Change password",
+    "t5": "Exit the system",
+    "t6": "Multi language switching",
+    "t7": "Chinese",
+    "t8": "English",
+    "t9": "Home page"
+  },
+  "menu": {
+    "t1": "Home",
+    "t2": "",
+    "t3": "",
+    "t4": "",
+    "t5": "",
+    "t6": "",
+    "t7": "",
+    "t8": "",
+    "t9": ""
+  }
+}

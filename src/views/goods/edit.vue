@@ -90,7 +90,7 @@ import anImg from "@/components/an_img.vue";
 import editor from "@/components/editor/index.vue";
 import draggable from "vuedraggable"; //拖拽组件配置信息
 
-const drag = false;
+const drag = ref(false);
 const dragOptions = {
   animation: 200,
   group: "description",

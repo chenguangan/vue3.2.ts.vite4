@@ -36,7 +36,9 @@
           </el-pagination>
         </div>
         <div>
-          <el-button @click="ok">取消</el-button>
+          <el-button type="primary">上传图片</el-button>
+          <el-button type="primary">裁剪上传</el-button>
+          <el-button @click="ok()">取消</el-button>
         </div>
       </div>
     </template>

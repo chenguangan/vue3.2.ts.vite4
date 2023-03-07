@@ -46,6 +46,9 @@ setTimeout(() => {
   background: #fff;
   padding: 2px;
   color: #555;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), 0 0 2px rgba(0, 0, 0, 0.04);
+  position: relative;
+  z-index: 9;
   .v1 {
     line-height: 20px;
     padding: 0 8px 0 10px;

@@ -20,7 +20,7 @@
             <div class="c10" @click="pageData.img = ''">删除</div>
           </div>
         </div>
-        <div class="b2" @click="imgOption.name = '';showImg = true">
+        <div class="b2" @click="imgOption.name = 'img';showImg = true">
           <i class="custom-icon custom-icon-jia_sekuai"></i>
         </div>
       </div>
@@ -70,16 +70,14 @@
   <div class="c1">
     <div class="c2">
       <div class="c3">详情:</div>
-      <vue-ueditor-wrap
-        v-model="pageData.content"
-        :config="editorConfig"
-        editor-id="editor-demo-01"
-      ></vue-ueditor-wrap>
+      <editor ref="editorRef" @selectImg="imgOption.name = 'editor';showImg = true;"/>
     </div>
   </div>
 
-  <div class="footer">
-    <el-button>重置</el-button>
+  <div class="footer-bg"></div>
+
+  <div class="footer flex">
+    <el-button>取消</el-button>
     <el-button type="primary" @click="subForm">确定</el-button>
   </div>
 
@@ -87,8 +85,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { ref, reactive,onMounted } from "vue";
 import anImg from "@/components/an_img.vue";
+import editor from "@/components/editor/index.vue";
 import draggable from "vuedraggable"; //拖拽组件配置信息
 
 const drag = false;
@@ -101,7 +100,6 @@ const dragOptions = {
 
 const pageData = reactive<any>({
   title:'',
-  content:'<h2>Hello World!</h2>',
   imgList: [],
   img: "",
 });
@@ -112,22 +110,31 @@ const imgOption = ref({
 
 const showImg = ref(false);
 
+const editorRef = ref<any>(null);
+
+onMounted(()=>{
+  //编辑器默认值
+  editorRef.value.content = '<h2>Hello World!</h2>'
+})
+
 function getImg(data: any) {
   if(imgOption.value.name === 'list'){
     pageData.imgList.push(data.imgUrl);
-  }else{
+  }
+  if(imgOption.value.name === 'img'){
     pageData.img = data.imgUrl;
   }
+  if(imgOption.value.name === 'editor'){
+    //编辑器选择图片
+    editorRef.value.editorObj.execCommand(
+				'inserthtml', 
+				`<p><img style='max-width:100%' src='${data.imgUrl}'/></p>`
+			);
+  }
 }
-
-const editorConfig = {
-  UEDITOR_HOME_URL: "/UEditor/", // 访问 UEditor 静态资源的根路径，可参考常见问题1
-  serverUrl: "//ueditor.szcloudplus.com/cos", // 服务端接口（这个地址是我为了方便各位体验文件上传功能搭建的临时接口，请勿在生产环境使用！！！）
-};
-
 //提交
 function subForm(){
-
+  console.log('详情',editorRef.value.content);
 }
 </script>
 
@@ -200,5 +207,13 @@ function subForm(){
   text-align: center;
   color: #fff;
   line-height: 30px;
+}
+
+.footer{
+  padding: 10px;
+  justify-content: flex-end;
+  background: #fcfcfc;
+
+
 }
 </style>

@@ -22,7 +22,8 @@
             </router-view>
             <el-backtop
               :right="50"
-              :bottom="50"
+              :bottom="100"
+              z-index="999999"
               target=".c1 .el-scrollbar__wrap"
             />
           </div>

@@ -2,66 +2,138 @@
   <div class="c1">
     <div class="c2">
       <div class="c3">标题:</div>
-      <div class="c4"><el-input placeholder="请输入" /></div>
+      <div class="c4"><el-input placeholder="请输入" v-model="pageData.title" /></div>
     </div>
   </div>
+
   <div class="c1">
     <div class="c2">
-      <div class="c3">图片:</div>
+      <div class="c3">图片-单张:</div>
       <div class="c4 flex">
         <div class="b1">
-          <el-image
-            v-if="imgSrc"
-            style="width: 120px; height: 120px"
-            :src="imgSrc"
-            fit="contain"
-          ></el-image>
+          <div class="c8 flex list-group-item" v-if="pageData.img">
+            <el-image
+              style="width: 100%; height: 100%"
+              :src="pageData.img"
+              fit="contain"
+            ></el-image>
+            <div class="c10" @click="pageData.img = ''">删除</div>
+          </div>
         </div>
-        <div class="b2" @click="showImg = true">
+        <div class="b2" @click="imgOption.name = '';showImg = true">
           <i class="custom-icon custom-icon-jia_sekuai"></i>
         </div>
       </div>
     </div>
   </div>
+
+  <div class="c1">
+    <div class="c2">
+      <div class="c3">图片-最多5张-可以拖拽排序:</div>
+      <div class="c4 flex">
+        <div class="b1">
+          <draggable
+            class="list-group flex"
+            tag="transition-group"
+            :component-data="{
+              tag: 'div',
+              type: 'transition-group',
+              name: !drag ? 'flip-list' : null,
+            }"
+            v-model="pageData.imgList"
+            v-bind="dragOptions"
+            @start="drag = true"
+            @end="drag = false"
+            item-key="v"
+          >
+            <template #item="{ element, index }">
+              <div class="c8 flex list-group-item">
+                <el-image
+                  style="width: 100%; height: 100%"
+                  :src="element"
+                  fit="contain"
+                ></el-image>
+                <div class="c10" @click="pageData.imgList.splice(index, 1)">
+                  删除
+                </div>
+              </div>
+            </template>
+          </draggable>
+        </div>
+        <div class="b2" @click="imgOption.name = 'list';showImg = true;" v-if="pageData.imgList.length < 5">
+          <i class="custom-icon custom-icon-jia_sekuai"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="c1">
     <div class="c2">
       <div class="c3">详情:</div>
       <vue-ueditor-wrap
-        v-model="msg"
+        v-model="pageData.content"
         :config="editorConfig"
         editor-id="editor-demo-01"
       ></vue-ueditor-wrap>
     </div>
   </div>
+
   <div class="footer">
     <el-button>重置</el-button>
-    <el-button type="primary">确定</el-button>
+    <el-button type="primary" @click="subForm">确定</el-button>
   </div>
 
-  <anImg v-model:show="showImg" @getImg="getImg" />
+  <anImg v-model:show="showImg" @getImg="getImg" :data="imgOption"/>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 import anImg from "@/components/an_img.vue";
+import draggable from "vuedraggable"; //拖拽组件配置信息
+
+const drag = false;
+const dragOptions = {
+  animation: 200,
+  group: "description",
+  disabled: false,
+  ghostClass: "ghost",
+};
+
+const pageData = reactive<any>({
+  title:'',
+  content:'<h2>Hello World!</h2>',
+  imgList: [],
+  img: "",
+});
+
+const imgOption = ref({
+  name:'list'
+})
 
 const showImg = ref(false);
-const imgSrc = ref("");
+
 function getImg(data: any) {
-  console.log(data);
-  imgSrc.value = data;
+  if(imgOption.value.name === 'list'){
+    pageData.imgList.push(data.imgUrl);
+  }else{
+    pageData.img = data.imgUrl;
+  }
 }
 
-const msg = ref("<h2>Hello World!</h2>");
 const editorConfig = {
   UEDITOR_HOME_URL: "/UEditor/", // 访问 UEditor 静态资源的根路径，可参考常见问题1
   serverUrl: "//ueditor.szcloudplus.com/cos", // 服务端接口（这个地址是我为了方便各位体验文件上传功能搭建的临时接口，请勿在生产环境使用！！！）
 };
+
+//提交
+function subForm(){
+
+}
 </script>
 
 <style lang="scss" scoped>
 .c1 {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .c3 {
@@ -69,18 +141,10 @@ const editorConfig = {
 }
 
 .c4 {
-  .b1 {
-    .el-image {
-      margin-right: 5px;
-      border: 1px dashed #ccc;
-      border-radius: 5px;
-      display: block;
-    }
-  }
   .b2 {
-    height: 122px;
-    width: 122px;
-    line-height: 122px;
+    height: 120px;
+    width: 120px;
+    line-height: 120px;
     text-align: center;
     border: 1px dashed #ccc;
     border-radius: 5px;
@@ -89,5 +153,52 @@ const editorConfig = {
       border-color: var(--el-color-primary);
     }
   }
+}
+
+.c8 {
+  margin-right: 10px;
+  width: 120px;
+  height: 120px;
+  position: relative;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px dashed #d9d9d9;
+}
+
+.c8:hover {
+  border-color: var(--el-color-primary);
+  cursor: move;
+}
+
+.c8:hover .c10 {
+  opacity: 1;
+}
+
+.c8 img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.c9 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.c10 {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  cursor: pointer;
+  width: 100%;
+  background: var(--el-color-primary);
+  opacity: 0;
+  transition: 0.3s;
+  text-align: center;
+  color: #fff;
+  line-height: 30px;
 }
 </style>

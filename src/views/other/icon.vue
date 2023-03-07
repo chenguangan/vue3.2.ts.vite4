@@ -875,7 +875,6 @@ import { reactive, ref } from "vue";
 
 .icon_lists li {
   width: 100px;
-
   margin-bottom: 10px;
   margin-right: 20px;
   text-align: center;
@@ -899,9 +898,6 @@ import { reactive, ref } from "vue";
   transition: font-size 0.25s linear, width 0.25s linear;
 }
 
-.icon_lists .icon:hover {
-  font-size: 100px;
-}
 
 .icon_lists .svg-icon {
   /* 通过设置 font-size 来改变图标大小 */
@@ -918,5 +914,9 @@ import { reactive, ref } from "vue";
 .icon_lists li .name,
 .icon_lists li .code-name {
   color: #666;
+}
+
+html.dark{
+  .icon{color: #ccc;}
 }
 </style>

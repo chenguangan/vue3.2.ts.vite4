@@ -14,11 +14,11 @@
         <div class="b2">
           <div class="b3">
             <router-view v-slot="{ Component, route }">
-              <!-- <transition name="fade-transform" mode="out-in"> -->
+              <transition name="fade-transform" mode="out-in">
                 <keep-alive :include="['home']">
                   <component :is="Component" :key="route.fullPath" />
                 </keep-alive>
-              <!-- </transition> -->
+              </transition>
             </router-view>
             <el-backtop
               :right="50"

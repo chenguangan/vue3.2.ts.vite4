@@ -1,4 +1,5 @@
 <template>
+<div>
   <anTable :data="tableData" @getChecked="(data:any)=>selectData = data">
     <template #search>
       <div class="flex search">
@@ -43,6 +44,7 @@
       </el-table-column>
     </template>
   </anTable>
+</div>
 </template>
 
 <script lang="ts" setup>

@@ -1,4 +1,5 @@
 <template>
+<div>
   <div class="c1">
     <div class="c2">
       <div class="c3">标题:</div>
@@ -82,6 +83,7 @@
   </div>
 
   <anImg v-model:show="showImg" @getImg="getImg" :data="imgOption"/>
+</div>
 </template>
 
 <script setup lang="ts">

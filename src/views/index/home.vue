@@ -1,4 +1,5 @@
 <template>
+<div>
   <div style="height: 10vh">
     <router-link to="/test">跳转内部页面</router-link>
   </div>
@@ -6,6 +7,7 @@
     <el-button @click="num++">点击++</el-button>
     <h1>切换页面，数字加的状态保持：{{ num }}</h1>
   </div>
+</div>
 </template>
 
 <script lang="ts">

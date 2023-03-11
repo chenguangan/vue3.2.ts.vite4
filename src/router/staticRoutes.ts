@@ -18,7 +18,7 @@ import iconfont from '@/views/other/icon.vue';
  */
 
 
-export const staticRoutes = [
+const staticRoutes:any = [
   {
     path: '/',
     name: '首页',
@@ -66,3 +66,4 @@ export const staticRoutes = [
     }
   },
 ];
+export default staticRoutes; 

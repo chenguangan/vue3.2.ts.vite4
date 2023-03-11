@@ -1,5 +1,5 @@
 import { reactive } from "vue";
-import { staticRoutes } from "@/router/staticRoutes";
+import staticRoutes from "@/router/staticRoutes";
 import { useRouter } from "vue-router";
 
 const tags = reactive({

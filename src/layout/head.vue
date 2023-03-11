@@ -19,7 +19,7 @@
             <el-breadcrumb-item :to="{ path: '/' }">{{
               $t("sys.t9")
             }}</el-breadcrumb-item>
-            <el-breadcrumb-item><a href="/">列表</a></el-breadcrumb-item>
+            <el-breadcrumb-item><a href="/">{{$route.name}}</a></el-breadcrumb-item>
           </el-breadcrumb>
         </div>
       </div>
@@ -91,11 +91,13 @@ import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useSysStore } from "@/store/sys";
 import { useDark } from "@vueuse/core";
-import { useRouter } from 'vue-router';
+import { useRouter,useRoute } from 'vue-router';
 import themeColor from './components/themeColor.vue';
 
 
 const isDark = useDark();
+const route = useRoute();
+console.log(route)
 const router = useRouter();
 const sysStore = useSysStore();
 const { locale } = useI18n();

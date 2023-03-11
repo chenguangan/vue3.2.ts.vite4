@@ -86,6 +86,12 @@
 </div>
 </template>
 
+<script lang="ts">
+export default {
+  name: "GoodsEdit",
+};
+</script>
+
 <script setup lang="ts">
 import { ref, reactive,onMounted } from "vue";
 import anImg from "@/components/an_img.vue";

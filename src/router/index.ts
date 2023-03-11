@@ -1,12 +1,13 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import { staticRoutes } from './staticRoutes';
+import staticRoutes from './staticRoutes';
 import defaultRoutes from './defaultRoutes';
-
-const routes: any = staticRoutes.concat(defaultRoutes);
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes:[
+    ...staticRoutes,
+    ...defaultRoutes,
+  ]
 });
 
 router.beforeEach((to, from, next) => {

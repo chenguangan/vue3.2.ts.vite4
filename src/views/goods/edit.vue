@@ -1,89 +1,136 @@
 <template>
-<div>
-  <div class="c1">
-    <div class="c2">
-      <div class="c3">标题:</div>
-      <div class="c4"><el-input placeholder="请输入" v-model="pageData.title" /></div>
+  <div>
+    <div class="c1">
+      <div class="c2">
+        <div class="c3">标题:</div>
+        <div class="c4">
+          <el-input placeholder="请输入" v-model="pageData.title" />
+        </div>
+      </div>
     </div>
-  </div>
 
-  <div class="c1">
-    <div class="c2">
-      <div class="c3">图片-单张:</div>
-      <div class="c4 flex">
-        <div class="b1">
-          <div class="c8 flex list-group-item" v-if="pageData.img">
-            <el-image
-              style="width: 100%; height: 100%"
-              :src="pageData.img"
-              fit="contain"
-            ></el-image>
-            <div class="c10" @click="pageData.img = ''">删除</div>
+    <div class="c1">
+      <div class="c2">
+        <div class="c3">图片-单张:</div>
+        <div class="c4 flex">
+          <div class="b1" v-if="pageData.img">
+            <div class="c8 flex">
+              <el-image
+                style="width: 100%; height: 100%"
+                :src="pageData.img"
+                fit="contain"
+                :preview-src-list="[pageData.img]"
+              ></el-image>
+              <div class="c10 flex">
+                <i
+                  class="custom-icon custom-icon-trash"
+                  @click="pageData.img = ''"
+                ></i>
+                <i
+                  class="custom-icon custom-icon-tihuan"
+                  @click="
+                    imgOption.name = 'img';
+                    showImg = true;
+                  "
+                ></i>
+              </div>
+            </div>
+          </div>
+          <div
+            v-else
+            class="b2"
+            @click="
+              imgOption.name = 'img';
+              showImg = true;
+            "
+          >
+            <i class="custom-icon custom-icon-jia_sekuai"></i>
           </div>
         </div>
-        <div class="b2" @click="imgOption.name = 'img';showImg = true">
-          <i class="custom-icon custom-icon-jia_sekuai"></i>
-        </div>
       </div>
     </div>
-  </div>
 
-  <div class="c1">
-    <div class="c2">
-      <div class="c3">图片-最多5张-可以拖拽排序:</div>
-      <div class="c4 flex">
-        <div class="b1">
-          <draggable
-            class="list-group flex"
-            tag="transition-group"
-            :component-data="{
-              tag: 'div',
-              type: 'transition-group',
-              name: !drag ? 'flip-list' : null,
-            }"
-            v-model="pageData.imgList"
-            v-bind="dragOptions"
-            @start="drag = true"
-            @end="drag = false"
-            item-key="v"
-          >
-            <template #item="{ element, index }">
-              <div class="c8 flex list-group-item">
-                <el-image
-                  style="width: 100%; height: 100%"
-                  :src="element"
-                  fit="contain"
-                ></el-image>
-                <div class="c10" @click="pageData.imgList.splice(index, 1)">
-                  删除
+    <div class="c1">
+      <div class="c2">
+        <div class="c3">图片-最多3张-可以拖拽排序:</div>
+        <div class="c4 flex">
+          <div class="b1">
+            <draggable
+              class="list-group flex"
+              tag="transition-group"
+              :component-data="{
+                tag: 'div',
+                type: 'transition-group',
+                name: !drag ? 'flip-list' : null,
+              }"
+              v-model="pageData.imgList"
+              v-bind="dragOptions"
+              @start="drag = true"
+              @end="drag = false"
+              item-key="v"
+            >
+              <template #item="{ element, index }">
+                <div class="c8 flex">
+                  <el-image
+                    style="width: 100%; height: 100%"
+                    :src="element"
+                    :preview-src-list="pageData.imgList"
+                    :initial-index="index"
+                    fit="contain"
+                  ></el-image>
+                  <div class="c10 flex">
+                    <i
+                      class="custom-icon custom-icon-trash"
+                      @click="pageData.imgList.splice(index, 1)"
+                    ></i>
+                    <i
+                      class="custom-icon custom-icon-tihuan"
+                      @click="
+                        imgOption.name = 'img';
+                        showImg = true;
+                      "
+                    ></i>
+                  </div>
                 </div>
-              </div>
-            </template>
-          </draggable>
-        </div>
-        <div class="b2" @click="imgOption.name = 'list';showImg = true;" v-if="pageData.imgList.length < 5">
-          <i class="custom-icon custom-icon-jia_sekuai"></i>
+              </template>
+            </draggable>
+          </div>
+          <div
+            class="b2"
+            @click="
+              imgOption.name = 'list';
+              showImg = true;
+            "
+            v-if="pageData.imgList.length < 5"
+          >
+            <i class="custom-icon custom-icon-jia_sekuai"></i>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="c1">
-    <div class="c2">
-      <div class="c3">详情:</div>
-      <editor ref="editorRef" @selectImg="imgOption.name = 'editor';showImg = true;"/>
+    <div class="c1">
+      <div class="c2">
+        <div class="c3">详情:</div>
+        <editor
+          ref="editorRef"
+          @selectImg="
+            imgOption.name = 'editor';
+            showImg = true;
+          "
+        />
+      </div>
     </div>
+
+    <div class="footer-bg"></div>
+
+    <div class="footer flex">
+      <el-button>取消</el-button>
+      <el-button type="primary" @click="subForm">确定</el-button>
+    </div>
+
+    <anImg v-model:show="showImg" @getImg="getImg" :data="imgOption" />
   </div>
-
-  <div class="footer-bg"></div>
-
-  <div class="footer flex">
-    <el-button>取消</el-button>
-    <el-button type="primary" @click="subForm">确定</el-button>
-  </div>
-
-  <anImg v-model:show="showImg" @getImg="getImg" :data="imgOption"/>
-</div>
 </template>
 
 <script lang="ts">
@@ -93,8 +140,8 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, reactive,onMounted } from "vue";
-import anImg from "@/components/an_img.vue";
+import { ref, reactive, onMounted } from "vue";
+import anImg from "@/components/an-img.vue";
 import editor from "@/components/editor/index.vue";
 import draggable from "vuedraggable"; //拖拽组件配置信息
 
@@ -107,42 +154,42 @@ const dragOptions = {
 };
 
 const pageData = reactive<any>({
-  title:'',
+  title: "",
   imgList: [],
   img: "",
 });
 
 const imgOption = ref({
-  name:'list'
-})
+  name: "list",
+});
 
 const showImg = ref(false);
 
 const editorRef = ref<any>(null);
 
-onMounted(()=>{
+onMounted(() => {
   //编辑器默认值
-  editorRef.value.content = '<h2>Hello World!</h2>'
-})
+  editorRef.value.content = "<h2>Hello World!</h2>";
+});
 
 function getImg(data: any) {
-  if(imgOption.value.name === 'list'){
+  if (imgOption.value.name === "list") {
     pageData.imgList.push(data.imgUrl);
   }
-  if(imgOption.value.name === 'img'){
+  if (imgOption.value.name === "img") {
     pageData.img = data.imgUrl;
   }
-  if(imgOption.value.name === 'editor'){
+  if (imgOption.value.name === "editor") {
     //编辑器选择图片
     editorRef.value.editorObj.execCommand(
-				'inserthtml', 
-				`<p><img style='max-width:100%' src='${data.imgUrl}'/></p>`
-			);
+      "inserthtml",
+      `<p><img style='max-width:100%' src='${data.imgUrl}'/></p>`
+    );
   }
 }
 //提交
-function subForm(){
-  console.log('详情',editorRef.value.content);
+function subForm() {
+  console.log("详情", editorRef.value.content);
 }
 </script>
 
@@ -184,7 +231,12 @@ function subForm(){
 
 .c8:hover {
   border-color: var(--el-color-primary);
-  cursor: move;
+}
+
+.list-group {
+  .c8:hover {
+    cursor: move;
+  }
 }
 
 .c8:hover .c10 {
@@ -209,19 +261,29 @@ function subForm(){
   bottom: 0;
   cursor: pointer;
   width: 100%;
-  background: var(--el-color-primary);
+  background: rgba(0, 0, 0, 0.7);
   opacity: 0;
   transition: 0.3s;
   text-align: center;
   color: #fff;
-  line-height: 30px;
+  line-height: 30%;
+  height: 30%;
+  i {
+    width: 50%;
+    font-size: 21px;
+    text-align: center;
+    &:hover {
+      color: var(--el-color-primary);
+    }
+  }
+  i.custom-icon-trash {
+    font-size: 19px;
+  }
 }
 
-.footer{
+.footer {
   padding: 10px;
   justify-content: flex-end;
   background: #fcfcfc;
-
-
 }
 </style>

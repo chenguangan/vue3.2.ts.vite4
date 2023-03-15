@@ -49,7 +49,7 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import anTable from "@/components/an_table.vue";
+import anTable from "@/components/an-table.vue";
 import { ElMessage } from "element-plus";
 
 const selectData = ref([]); //获取勾选的数据

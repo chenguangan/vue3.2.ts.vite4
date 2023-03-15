@@ -23,7 +23,7 @@ const defaultRoutes: any = [
     path: "/pass",
     name: "修改密码",
     component: () => import('@/views/sys/pass.vue'),
-  },
+  }
 ];
 
 export default defaultRoutes;

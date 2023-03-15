@@ -16,6 +16,7 @@
       :default-active="$route.path"
       @select="setMenu"
       text-color="#fff"
+      :default-openeds="['/goods']"
     >
       <template v-for="(routeItem, routeIndex) in routes">
         <!-- 没有子路由的一级路由 -->
@@ -66,13 +67,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
 import { useSysStore } from "@/store/sys";
-import { useRoute } from "vue-router";
 import { useTagsViewHook } from "@/composition/useTagViewApi";
 
 //接受父组件参数
-const props = defineProps({
+defineProps({
   routes: {
     type: Object,
     default: () => {
@@ -82,27 +81,8 @@ const props = defineProps({
 });
 
 const sysStore = useSysStore();
-const route = useRoute();
 
 const { setMenu } = useTagsViewHook();
-
-let currentActiveRoute = ref("");
-
-// watch(route, (newVal, oldVal) => {
-//   console.log(newVal);
-//   if (newVal.meta.activePath) {
-//     currentActiveRoute.value = newVal.meta.activePath;
-//   } else {
-//     currentActiveRoute.value = newVal.path;
-//   }
-// });
-
-function menuSelect(index: string,indexPath:any,item:any,routeResult:any) {
-  console.log(index,indexPath,item,routeResult);
-  // tagsViewStore.tags.push({
-
-  // })
-}
 </script>
 
 <style scoped lang="scss">

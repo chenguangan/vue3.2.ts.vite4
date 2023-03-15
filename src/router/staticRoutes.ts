@@ -1,8 +1,11 @@
 import wrapper from '@/layout/wrapper.vue';
 import home from '@/views/index/home.vue';
+import configPage from '@/views/index/config.vue';
 import goodsEdit from '@/views/goods/edit.vue';
-import goods from '@/views/goods/list.vue';
+import goodsList from '@/views/goods/list.vue';
+import goodsType from '@/views/goods/type.vue';
 import iconfont from '@/views/other/icon.vue';
+
 /**
  * 
  * 路由配置规则：
@@ -29,7 +32,6 @@ const staticRoutes:any = [
       icon: 'custom-icon-Home'
     }
   },
-
   {
     path: '/goods',
     name: '商品管理',
@@ -41,20 +43,28 @@ const staticRoutes:any = [
       {
         path: '/goods/list', 
         name: '商品列表',
-        component: goods,
-        meta: {
-          icon: 'custom-icon-trash'
-        },
+        component: goodsList
+      },
+      {
+        path: '/goods/type', 
+        name: '商品类型',
+        component: goodsType
       },
       {
         path: '/goods/edit',
         name: '添加商品',
-        component: goodsEdit,
-        meta: {
-          icon: 'custom-icon-zhangdan'
-        }
+        component: goodsEdit
       },
     ]
+  },
+  {
+    path: '/config',
+    name: '系统配置',
+    component: configPage,
+    children: [],
+    meta: {
+      icon: 'custom-icon-shezhi'
+    }
   },
   {
     path: '/icon',

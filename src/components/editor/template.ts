@@ -619,13 +619,6 @@ export default [
 	`,
 	`
 		<section class="wwei-editor">
-			<blockquote class="wweibrush"
-				style="orphans: 2; white-space: normal; widows: 2; font-size: 14px; line-height: 22.39px;margin: 10px 0px; padding:15px 20px 15px 45px; outline: 0px; border: 0px currentcolor; color: rgb(62, 62, 62); vertical-align: baseline; background-image: url(http://qiniu.other.88an.top/wxedit/left_quote.jpg); background-color: rgb(241, 241, 241); background-position: 1% 5px; background-repeat: no-repeat no-repeat;">
-				这里插入分号引用样式的内容。</blockquote>
-		</section>
-	`,
-	`
-		<section class="wwei-editor">
 			<fieldset
 				style="margin: 0.5em 0px; padding: 0px; max-width: 100%; box-sizing: border-box; color: rgb(62, 62, 62); line-height: 25px; white-space: normal; border: 0px rgb(238, 222, 176); word-wrap: break-word !important;">
 				<section
@@ -634,9 +627,9 @@ export default [
 						style="box-sizing:border-box; color:inherit; height:65px; margin:0px auto; padding:0px; visibility:visible !important; width:60px; word-wrap:break-word !important" />
 				</section>
 				<section
-					style="margin: -2.3em 0px 0px; padding: 2em 0px 0px; max-width: 100%; box-sizing: border-box; min-height: 15em; font-size: 1em;  font-weight: inherit; text-decoration: inherit; color: rgb(131, 104, 28); border-color: rgb(238, 222, 176); word-wrap: break-word !important; background-image: url(http://qiniu.other.88an.top/wxedit/07.png); background-color: rgb(238, 222, 176); background-repeat: repeat;">
+					style="margin: -2.3em 0px 0px; padding: 2em 0px 0px; max-width: 100%; box-sizing: border-box; min-height: 15em; font-size: 1em;  font-weight: inherit; text-decoration: inherit; color: rgb(131, 104, 28); border-color: rgb(238, 222, 176); word-wrap: break-word !important;  background-color: rgb(238, 222, 176); background-repeat: repeat;">
 					<section
-						style="margin: 0.3em auto; padding: 0.5em; max-width: 100%; box-sizing: border-box; width: 7em; height: 3.5em; line-height: 2em; overflow: hidden; -webkit-transform: rotate(-5deg); font-size: 32px;  font-weight: inherit; text-align: center; text-decoration: inherit; color: inherit; word-wrap: break-word !important; background-image: url(http://qiniu.other.88an.top/wxedit/08.png); background-repeat: no-repeat;background-size: contain;">
+						style="margin: 0.3em auto; padding: 0.5em; max-width: 100%; box-sizing: border-box; width: 7em; height: 3.5em; line-height: 2em; overflow: hidden; -webkit-transform: rotate(-5deg); font-size: 32px;  font-weight: inherit; text-align: center; text-decoration: inherit; color: inherit; word-wrap: break-word !important; background-repeat: no-repeat;background-size: contain;">
 						<section
 							style="margin: 0px; padding: 0px; max-width: 100%; box-sizing: border-box; word-wrap: break-word !important;">
 							<span
@@ -720,29 +713,6 @@ export default [
 					style="margin: 15px; margin-bottom: 0px; padding: 0px; line-height: 2em; color: rgb(62, 62, 62); font-size: 14px;">
 					<p style="text-indent: 2em; color: inherit;">
                         选择需要应用样式的文字，然后选择要使用的样式，即可实现秒刷效果。秒刷支持所有样式</p>
-				</section>
-			</fieldset>
-		</section>
-	`,
-	`
-		<section class="wwei-editor">
-			<fieldset
-				style="margin: 0.5em 0px; padding: 0px; max-width: 100%; box-sizing: border-box; color: rgb(62, 62, 62); font-family: inherit; font-size: medium; line-height: 25px; white-space: normal; border: none rgb(254, 253, 254); word-wrap: break-word !important;">
-				<section
-					style="margin: 0px; padding: 3.8em 0px; max-width: 100%; box-sizing: border-box; width: 12.5em; height: 12.5em; float: right; text-align: center; word-wrap: break-word !important; background-image: url(http://qiniu.other.88an.top/wxedit/20180919_wxeditor_383064873.png); background-size: cover;">
-					<section
-						style="margin: 0px 0px 0px 16px; padding: 0px; max-width: 100%; box-sizing: border-box; width: 140px; overflow: hidden; -webkit-transform: rotate(-13deg); font-size: 22px; font-family: inherit; font-weight: inherit; text-decoration: inherit; color: rgb(102, 102, 102); word-wrap: break-word !important;">
-						<section
-							style="margin: 0px; padding: 0px; max-width: 100%; box-sizing: border-box; word-wrap: break-word !important; color: inherit;">
-							Tips</section>
-					</section>
-					<section
-						style="margin: 10px 20px; padding: 0px; max-width: 100%; box-sizing: border-box; width: 150px; overflow: hidden; -webkit-transform: rotate(-15deg); font-size: 14px; font-family: inherit; font-weight: inherit; text-decoration: inherit; color: rgb(102, 102, 102); word-wrap: break-word !important;">
-						<section class="wweibrush"
-							style="margin: 0px; padding: 0px; max-width: 100%; box-sizing: border-box; word-wrap: break-word !important; color: inherit;">
-							<p>我是图片不能换色哦</p>
-						</section>
-					</section>
 				</section>
 			</fieldset>
 		</section>

@@ -13,39 +13,7 @@
       <div class="c2">
         <div class="c3">图片-单张:</div>
         <div class="c4 flex">
-          <div class="b1" v-if="pageData.img">
-            <div class="c8 flex">
-              <el-image
-                style="width: 100%; height: 100%"
-                :src="pageData.img"
-                fit="contain"
-                :preview-src-list="[pageData.img]"
-              ></el-image>
-              <div class="c10 flex">
-                <i
-                  class="custom-icon custom-icon-trash"
-                  @click="pageData.img = ''"
-                ></i>
-                <i
-                  class="custom-icon custom-icon-tihuan"
-                  @click="
-                    imgOption.name = 'img';
-                    showImg = true;
-                  "
-                ></i>
-              </div>
-            </div>
-          </div>
-          <div
-            v-else
-            class="b2"
-            @click="
-              imgOption.name = 'img';
-              showImg = true;
-            "
-          >
-            <i class="custom-icon custom-icon-jia_sekuai"></i>
-          </div>
+          <up-img v-model="pageData.img" @pickImg="pickImg('img')" />
         </div>
       </div>
     </div>
@@ -54,57 +22,11 @@
       <div class="c2">
         <div class="c3">图片-最多3张-可以拖拽排序:</div>
         <div class="c4 flex">
-          <div class="b1">
-            <draggable
-              class="list-group flex"
-              tag="transition-group"
-              :component-data="{
-                tag: 'div',
-                type: 'transition-group',
-                name: !drag ? 'flip-list' : null,
-              }"
-              v-model="pageData.imgList"
-              v-bind="dragOptions"
-              @start="drag = true"
-              @end="drag = false"
-              item-key="v"
-            >
-              <template #item="{ element, index }">
-                <div class="c8 flex">
-                  <el-image
-                    style="width: 100%; height: 100%"
-                    :src="element"
-                    :preview-src-list="pageData.imgList"
-                    :initial-index="index"
-                    fit="contain"
-                  ></el-image>
-                  <div class="c10 flex">
-                    <i
-                      class="custom-icon custom-icon-trash"
-                      @click="pageData.imgList.splice(index, 1)"
-                    ></i>
-                    <i
-                      class="custom-icon custom-icon-tihuan"
-                      @click="
-                        imgOption.name = 'img';
-                        showImg = true;
-                      "
-                    ></i>
-                  </div>
-                </div>
-              </template>
-            </draggable>
-          </div>
-          <div
-            class="b2"
-            @click="
-              imgOption.name = 'list';
-              showImg = true;
-            "
-            v-if="pageData.imgList.length < 5"
-          >
-            <i class="custom-icon custom-icon-jia_sekuai"></i>
-          </div>
+          <up-img
+            v-model="pageData.imgList"
+            @pickImg="pickImg('list', $event)"
+            :max="3"
+          />
         </div>
       </div>
     </div>
@@ -112,13 +34,7 @@
     <div class="c1">
       <div class="c2">
         <div class="c3">详情:</div>
-        <editor
-          ref="editorRef"
-          @selectImg="
-            imgOption.name = 'editor';
-            showImg = true;
-          "
-        />
+        <editor ref="editorRef" @selectImg="pickImg('editor')" />
       </div>
     </div>
 
@@ -129,7 +45,7 @@
       <el-button type="primary" @click="subForm">确定</el-button>
     </div>
 
-    <anImg v-model:show="showImg" @getImg="getImg" :data="imgOption" />
+    <layer-img v-model="imgOption.show" @getImg="getImg" />
   </div>
 </template>
 
@@ -141,29 +57,31 @@ export default {
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
-import anImg from "@/components/an-img.vue";
+import layerImg from "@/components/layer-img.vue";
+import upImg from "@/components/up-img.vue";
 import editor from "@/components/editor/index.vue";
-import draggable from "vuedraggable"; //拖拽组件配置信息
-
-const drag = ref(false);
-const dragOptions = {
-  animation: 200,
-  group: "description",
-  disabled: false,
-  ghostClass: "ghost",
-};
 
 const pageData = reactive<any>({
   title: "",
   imgList: [],
-  img: "",
+  img: [],
 });
 
-const imgOption = ref({
-  name: "list",
+const imgOption = reactive({
+  option: {
+    name: "",
+    index: -1,
+  },
+  show: false,
 });
 
-const showImg = ref(false);
+//name 是需要操作的图片字段名称
+//如果是替换 才会有index参数返回，index就是需要替换的数组下标
+function pickImg(name: string, index?: number) {
+  imgOption.option.name = name;
+  imgOption.option.index = index ?? -1;
+  imgOption.show = true;
+}
 
 const editorRef = ref<any>(null);
 
@@ -173,13 +91,20 @@ onMounted(() => {
 });
 
 function getImg(data: any) {
-  if (imgOption.value.name === "list") {
-    pageData.imgList.push(data.imgUrl);
+  //多图上传
+  if (imgOption.option.name === "list") {
+    if (imgOption.option.index != -1) {
+      pageData.imgList[imgOption.option.index] = data.imgUrl;
+    } else {
+      pageData.imgList.push(data.imgUrl);
+    }
   }
-  if (imgOption.value.name === "img") {
-    pageData.img = data.imgUrl;
+  //单图上传
+  if (imgOption.option.name === "img") {
+    pageData.img[0] = data.imgUrl;
   }
-  if (imgOption.value.name === "editor") {
+  //编辑器图片上传
+  if (imgOption.option.name === "editor") {
     //编辑器选择图片
     editorRef.value.editorObj.execCommand(
       "inserthtml",
@@ -200,85 +125,6 @@ function subForm() {
 
 .c3 {
   line-height: 30px;
-}
-
-.c4 {
-  .b2 {
-    height: 120px;
-    width: 120px;
-    line-height: 120px;
-    text-align: center;
-    border: 1px dashed #ccc;
-    border-radius: 5px;
-    cursor: pointer;
-    &:hover {
-      border-color: var(--el-color-primary);
-    }
-  }
-}
-
-.c8 {
-  margin-right: 10px;
-  width: 120px;
-  height: 120px;
-  position: relative;
-  border-radius: 5px;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border: 1px dashed #d9d9d9;
-}
-
-.c8:hover {
-  border-color: var(--el-color-primary);
-}
-
-.list-group {
-  .c8:hover {
-    cursor: move;
-  }
-}
-
-.c8:hover .c10 {
-  opacity: 1;
-}
-
-.c8 img {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.c9 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.c10 {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  cursor: pointer;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  opacity: 0;
-  transition: 0.3s;
-  text-align: center;
-  color: #fff;
-  line-height: 30%;
-  height: 30%;
-  i {
-    width: 50%;
-    font-size: 21px;
-    text-align: center;
-    &:hover {
-      color: var(--el-color-primary);
-    }
-  }
-  i.custom-icon-trash {
-    font-size: 19px;
-  }
 }
 
 .footer {

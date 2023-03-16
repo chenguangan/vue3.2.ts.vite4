@@ -87,7 +87,7 @@ const insertData = (data: string) => {
 
 //编辑器配置
 const editorConfig = {
-  zIndex: 2008,
+  zIndex: 2000,
   autoHeightEnabled: false,
   initialFrameHeight: 510,
   UEDITOR_HOME_URL: config.dev

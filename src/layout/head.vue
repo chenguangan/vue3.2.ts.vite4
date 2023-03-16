@@ -19,7 +19,9 @@
             <el-breadcrumb-item :to="{ path: '/' }">{{
               $t("sys.t9")
             }}</el-breadcrumb-item>
-            <el-breadcrumb-item><a href="/">{{$route.name}}</a></el-breadcrumb-item>
+            <el-breadcrumb-item
+              ><a href="/">{{ $route.name }}</a></el-breadcrumb-item
+            >
           </el-breadcrumb>
         </div>
       </div>
@@ -29,10 +31,14 @@
           <el-popover placement="bottom" :width="100" trigger="hover">
             <div style="text-align: center">
               <div style="margin-bottom: 10px">
-                <el-button style="width: 100%" @click="router.push('/pass')">{{ $t("sys.t4") }}</el-button>
+                <el-button style="width: 100%" @click="router.push('/pass')">{{
+                  $t("sys.t4")
+                }}</el-button>
               </div>
               <div>
-                <el-button style="width: 100%" @click="loginOut">{{ $t('sys.t5') }}</el-button>
+                <el-button style="width: 100%" @click="loginOut">{{
+                  $t("sys.t5")
+                }}</el-button>
               </div>
             </div>
             <template #reference>
@@ -70,8 +76,6 @@
           </el-popover>
         </div>
 
-        
-
         <!-- 控制暗黑模式 -->
         <el-switch
           v-model="isDark"
@@ -91,13 +95,10 @@ import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useSysStore } from "@/store/sys";
 import { useDark } from "@vueuse/core";
-import { useRouter,useRoute } from 'vue-router';
-import themeColor from './components/themeColor.vue';
-
+import { useRouter } from "vue-router";
+import themeColor from "./components/themeColor.vue";
 
 const isDark = useDark();
-const route = useRoute();
-console.log(route)
 const router = useRouter();
 const sysStore = useSysStore();
 const { locale } = useI18n();
@@ -108,10 +109,10 @@ const switchLang = (lang: string) => {
   localStorage.setItem("lang", lang);
 };
 
-function loginOut(){
-  console.log(123)
-  localStorage.removeItem('user');
-  router.push('/login')
+function loginOut() {
+  console.log(123);
+  localStorage.removeItem("user");
+  router.push("/login");
 }
 </script>
 
@@ -155,7 +156,6 @@ function loginOut(){
   }
 
   .c10 {
-
     .b1 {
       margin-right: 10px;
       line-height: 48px;

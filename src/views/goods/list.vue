@@ -36,10 +36,10 @@
       <el-table-column prop="address" label="地址" width="250" />
       <el-table-column fixed="right" label="操作栏" width="150" align="center">
         <template #default="scope">
-          <el-button type="text" size="small" @click="handleClick(scope)"
+          <el-button link type="primary" size="small" @click="handleClick(scope)"
             >详情</el-button
           >
-          <el-button type="text" size="small">编辑</el-button>
+          <el-button link type="primary" size="small">编辑</el-button>
         </template>
       </el-table-column>
     </template>

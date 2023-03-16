@@ -1,49 +1,35 @@
 <template>
   <div>
-    <div class="c1">
-      <div class="c2">
-        <div class="c3">标题:</div>
-        <div class="c4">
-          <el-input placeholder="请输入" v-model="pageData.title" />
-        </div>
+    <editPage @subForm="subForm">
+      <div class="item">
+        <div class="label">标题:</div>
+        <el-input
+          placeholder="请输入"
+          maxlength="100"
+          v-model="pageData.title"
+          show-word-limit
+        />
       </div>
-    </div>
 
-    <div class="c1">
-      <div class="c2">
-        <div class="c3">图片-单张:</div>
-        <div class="c4 flex">
-          <up-img v-model="pageData.img" @pickImg="pickImg('img')" />
-        </div>
+      <div class="item">
+        <div class="label">图片-单张:</div>
+        <up-img v-model="pageData.img" @pickImg="pickImg('img')" />
       </div>
-    </div>
 
-    <div class="c1">
-      <div class="c2">
-        <div class="c3">图片-最多3张-可以拖拽排序:</div>
-        <div class="c4 flex">
-          <up-img
-            v-model="pageData.imgList"
-            @pickImg="pickImg('list', $event)"
-            :max="3"
-          />
-        </div>
+      <div class="item">
+        <div class="label">图片-最多3张-可以拖拽排序:</div>
+        <up-img
+          v-model="pageData.imgList"
+          @pickImg="pickImg('list', $event)"
+          :max="3"
+        />
       </div>
-    </div>
 
-    <div class="c1">
-      <div class="c2">
-        <div class="c3">详情:</div>
+      <div class="item">
+        <div class="label">详情:</div>
         <editor ref="editorRef" @selectImg="pickImg('editor')" />
       </div>
-    </div>
-
-    <div class="footer-bg"></div>
-
-    <div class="footer flex">
-      <el-button>取消</el-button>
-      <el-button type="primary" @click="subForm">确定</el-button>
-    </div>
+    </editPage>
 
     <layer-img v-model="imgOption.show" @getImg="getImg" />
   </div>
@@ -57,6 +43,7 @@ export default {
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
+import editPage from "@/components/edit-page.vue";
 import layerImg from "@/components/layer-img.vue";
 import upImg from "@/components/up-img.vue";
 import editor from "@/components/editor/index.vue";
@@ -119,17 +106,11 @@ function subForm() {
 </script>
 
 <style lang="scss" scoped>
-.c1 {
+.item {
   margin-bottom: 20px;
 }
 
-.c3 {
+.label {
   line-height: 30px;
-}
-
-.footer {
-  padding: 10px;
-  justify-content: flex-end;
-  background: #fcfcfc;
 }
 </style>

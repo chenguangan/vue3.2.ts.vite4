@@ -21,7 +21,7 @@
       item-key="v"
     >
       <template #item="{ element, index }">
-        <div class="c8 flex">
+        <div class="v1 flex">
           <el-image
             style="width: 100%; height: 100%"
             :src="element"
@@ -29,37 +29,39 @@
             :initial-index="index"
             fit="contain"
           ></el-image>
-          <div class="c10 flex">
-            <i class="custom-icon custom-icon-trash" @click="delFun(index)"></i>
-            <i
-              class="custom-icon custom-icon-tihuan"
-              @click="emit('pickImg', index)"
-            ></i>
+          <div class="v2 flex">
+            <div @click="delFun(index)">
+              <i class="custom-icon custom-icon-trash"></i>
+            </div>
+            <div @click="emit('pickImg', index)">
+              <i class="custom-icon custom-icon-tihuan"></i>
+            </div>
           </div>
         </div>
       </template>
     </draggable>
 
     <!-- 图片列表 单张 -->
-    <div class="c8 flex" v-if="props.max === 1 && props.modelValue[0]">
+    <div class="v1 flex" v-if="props.max === 1 && props.modelValue[0]">
       <el-image
         style="width: 100%; height: 100%"
         :src="props.modelValue[0]"
         fit="contain"
         :preview-src-list="props.modelValue"
       ></el-image>
-      <div class="c10 flex">
-        <i
-          class="custom-icon custom-icon-trash"
-          @click="props.modelValue.splice(0, 1)"
-        ></i>
-        <i class="custom-icon custom-icon-tihuan" @click="emit('pickImg')"></i>
+      <div class="v2 flex">
+        <div @click="delFun(0)">
+          <i class="custom-icon custom-icon-trash"></i>
+        </div>
+        <div @click="emit('pickImg')">
+          <i class="custom-icon custom-icon-tihuan"></i>
+        </div>
       </div>
     </div>
 
     <!-- 选择图片 -->
     <div
-      class="b2"
+      class="v3"
       @click="emit('pickImg')"
       v-if="props.modelValue.length < props.max"
     >
@@ -105,19 +107,7 @@ const dragOptions = {
 </script>
 
 <style scoped lang="scss">
-.b2 {
-  height: 120px;
-  width: 120px;
-  line-height: 120px;
-  text-align: center;
-  border: 1px dashed #ccc;
-  border-radius: 5px;
-  cursor: pointer;
-  &:hover {
-    border-color: var(--el-color-primary);
-  }
-}
-.c8 {
+.v1 {
   margin-right: 10px;
   width: 120px;
   height: 120px;
@@ -129,49 +119,67 @@ const dragOptions = {
   border: 1px dashed #d9d9d9;
 }
 
-.c8:hover {
+.v1:hover {
   border-color: var(--el-color-primary);
 }
 
-.c8:hover .c10 {
+.v1:hover .v2 {
   opacity: 1;
 }
 
-.c8 img {
+.v1 img {
   width: 100%;
   height: 100%;
   display: block;
 }
 
-.c9 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.c10 {
+.v2 {
   position: absolute;
   right: 0;
   bottom: 0;
-  cursor: pointer;
   width: 100%;
   background: rgba(0, 0, 0, 0.7);
   opacity: 0;
   transition: 0.3s;
   text-align: center;
   color: #fff;
-  line-height: 30%;
-  height: 30%;
+  height: 40px;
+  > div {
+    height: 40px;
+    width: 50%;
+    line-height: 40px;
+    cursor: pointer;
+    text-align: center;
+    &:hover i {
+      color: var(--el-color-primary);
+    }
+  }
   i {
     width: 50%;
     font-size: 21px;
     text-align: center;
-    &:hover {
-      color: var(--el-color-primary);
-    }
   }
   i.custom-icon-trash {
     font-size: 19px;
+  }
+}
+.v3 {
+  height: 120px;
+  width: 120px;
+  line-height: 120px;
+  text-align: center;
+  border: 1px dashed #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  i {
+    color: #777;
+    font-size: 20px;
+  }
+  &:hover {
+    border-color: var(--el-color-primary);
+  }
+  &:hover i {
+    color: var(--el-color-primary);
   }
 }
 </style>

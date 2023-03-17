@@ -52,14 +52,21 @@
                 routeItem.meta.icon || 'custom-icon-Star2',
               ]"
             ></i>
-            <span>{{ routeItem.name }}</span>
+            <span v-if="routeItem.lang">{{ $t(routeItem.lang) }}</span>
+            <span v-else>{{ routeItem.name }}</span>
           </template>
           <el-menu-item
             :index="val.path"
             v-for="(val, index) in routeItem.children"
             :key="index"
-            >{{ val.name }}</el-menu-item
           >
+            <template v-if="val.lang">
+              {{ $t(val.lang) }}
+            </template>
+            <template v-else>
+              {{ val.name }}
+            </template>
+          </el-menu-item>
         </el-sub-menu>
       </template>
     </el-menu>

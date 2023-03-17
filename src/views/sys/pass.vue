@@ -28,7 +28,7 @@
             v-model="form.pass_a"
             minlength="5"
             maxlength="32"
-            placeholder="请输入新密码,如：An@123456"
+            placeholder="请输入新密码,如"
             show-password
             @input="checkPass"
           />

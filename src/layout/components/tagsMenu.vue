@@ -13,7 +13,7 @@
       :kye="i"
       @click="goTagRouter(v, i)"
     >
-      {{ v.name }}
+      {{ v.lang?$t(v.lang):v.name }}
       <div class="i" @click.stop="deleteTag(v, $route.path)">
         <i class="custom-icon custom-icon-guanbi1"></i>
       </div>

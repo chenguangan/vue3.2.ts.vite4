@@ -35,6 +35,7 @@ const staticRoutes:any = [
   {
     path: '/goods',
     name: '商品管理',
+    lang:'menu.t2',
     component: wrapper,
     meta: {
       icon: 'custom-icon-Bag1'
@@ -43,16 +44,19 @@ const staticRoutes:any = [
       {
         path: '/goods/list', 
         name: '商品列表',
+        lang:'menu.t3',
         component: goodsList
       },
       {
         path: '/goods/type', 
         name: '商品类型',
+        lang:'menu.t4',
         component: goodsType
       },
       {
         path: '/goods/edit',
         name: '添加商品',
+        lang:'menu.t5',
         component: goodsEdit
       },
     ]
@@ -60,6 +64,7 @@ const staticRoutes:any = [
   {
     path: '/config',
     name: '系统配置',
+    lang:'menu.t6',
     component: configPage,
     children: [],
     meta: {
@@ -69,6 +74,7 @@ const staticRoutes:any = [
   {
     path: '/icon',
     name: '图标',
+    lang:'menu.t7',
     component: iconfont,
     children: [],
     meta: {

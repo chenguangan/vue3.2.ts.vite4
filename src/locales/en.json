@@ -9,17 +9,31 @@
     "t6": "Multi language switching",
     "t7": "Chinese",
     "t8": "English",
-    "t9": "Home page"
+    "t9": "Background Management",
+    "t10": "Login",
+    "t11": "Please enter account number",
+    "t12": "Please enter the password",
+    "t13": "Please enter the verification code"
   },
   "menu": {
-    "t1": "Home",
-    "t2": "",
-    "t3": "",
+    "t1": "Home Page",
+    "t2": "Goods",
+    "t3": "Product list",
+    "t4": "Commodity type",
+    "t5": "Add goods",
+    "t6": "System",
+    "t7": "Icon"
+  },
+  "page": {
+    "t1": "Go to internal page",
+    "t2": "Click ",
+    "t3": "Switch page, keep the status of number addition",
     "t4": "",
     "t5": "",
     "t6": "",
     "t7": "",
     "t8": "",
-    "t9": ""
+    "t9": "",
+    "t10": ""
   }
 }

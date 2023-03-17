@@ -1,13 +1,14 @@
 import { reactive } from "vue";
 import staticRoutes from "@/router/staticRoutes";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 
 const tags = reactive({
-  routers: [{ path: "/", name: "首页" }],
+  routers: [{ path: "/", name: "首页", lang: "menu.t1" }],
 });
 
 export function useTagsViewHook() {
   const router = useRouter();
+  const route = useRoute();
 
   /**
    * @param value String 当前menu对应的路由path
@@ -25,7 +26,11 @@ export function useTagsViewHook() {
         arr.forEach((constItem: any, constIndex: any) => {
           //如果匹配 直接push进tags
           if (constItem.path === value) {
-            tags.routers.push({ path: value, name: constItem.name });
+            tags.routers.push({
+              path: value,
+              name: constItem.name,
+              lang: constItem.lang,
+            });
           } else {
             // 否则 查询是否还有子菜单，调用自身 继续查询
             if (constItem?.children?.length > 0) {
@@ -59,9 +64,18 @@ export function useTagsViewHook() {
       }
     });
   }
+
+  /**
+   * @return 获取当前激活路由对象
+   */
+  function getCurrent() {
+    return tags.routers.filter((v) => v.path === route.path);
+  }
+
   return {
     tags, // 动态路由
     setMenu, // 设置动态路由
     deleteTag, // 删除tagview
+    getCurrent, //获取当前激活路由对象
   };
 }

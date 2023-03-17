@@ -17,11 +17,13 @@
         <div class="b2">
           <el-breadcrumb separator="/">
             <el-breadcrumb-item :to="{ path: '/' }">{{
-              $t("sys.t9")
+              $t("menu.t1")
             }}</el-breadcrumb-item>
-            <el-breadcrumb-item
-              ><a href="/">{{ $route.name }}</a></el-breadcrumb-item
-            >
+            <el-breadcrumb-item v-if="getCurrent()[0].path != '/'">{{
+              getCurrent()[0].lang
+                ? $t(getCurrent()[0].lang)
+                : getCurrent()[0].name
+            }}</el-breadcrumb-item>
           </el-breadcrumb>
         </div>
       </div>
@@ -97,6 +99,9 @@ import { useSysStore } from "@/store/sys";
 import { useDark } from "@vueuse/core";
 import { useRouter } from "vue-router";
 import themeColor from "./components/themeColor.vue";
+import { useTagsViewHook } from "@/composition/useTagViewApi";
+
+const { getCurrent } = useTagsViewHook();
 
 const isDark = useDark();
 const router = useRouter();
@@ -110,7 +115,6 @@ const switchLang = (lang: string) => {
 };
 
 function loginOut() {
-  console.log(123);
   localStorage.removeItem("user");
   router.push("/login");
 }

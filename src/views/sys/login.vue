@@ -6,12 +6,12 @@
   </div>
   <div class="root flex">
     <div class="c2">
-      <div class="c3">后台管理</div>
+      <div class="c3">{{$t('sys.t9')}}</div>
       <div class="c4">vue3.2 + ts + vite + element-plus</div>
       <div class="c5">
         <div class="c6">
           <el-input
-            placeholder="请输入账号"
+            :placeholder="$t('sys.t11')"
             :prefix-icon="User"
             :clearable="true"
             size="large"
@@ -21,7 +21,7 @@
         </div>
         <div class="c6">
           <el-input
-            placeholder="请输入密码"
+            :placeholder="$t('sys.t12')"
             type="password"
             :show-password="true"
             size="large"
@@ -34,7 +34,7 @@
 
         <div class="c6 flex">
           <el-input
-            placeholder="请输入验证码"
+            :placeholder="$t('sys.t13')"
             :clearable="true"
             size="large"
             :prefix-icon="CollectionTag"
@@ -46,7 +46,7 @@
           </div>
         </div>
         <el-button size="large" type="primary" class="c7" @click="subLogin">
-          登录
+          {{$t('sys.t10')}}
         </el-button>
       </div>
     </div>

@@ -6,10 +6,10 @@
       false: sysStore.init.isCollapse,
     }"
   >
-    <an-menu :routes="routes" />
+    <an-menu />
 
     <div class="c1">
-      <tagsMenu />
+      <tags-menu />
       <el-scrollbar class="b1">
         <div class="b2">
           <div class="b3">
@@ -36,26 +36,9 @@
 <script setup lang="ts">
 import anHead from "./head.vue";
 import anMenu from "./menu.vue";
-import tagsMenu from "./components/tagsMenu.vue";
-import { useRouter, useRoute } from "vue-router";
-import { ref, watch, watchEffect } from "vue";
-import { useTagsViewHook } from "@/composition/useTagViewApi";
+import tagsMenu from "./components/tags-menu.vue";
 import { useSysStore } from "@/store/sys";
-
-// const { setMenu } = useTagsViewHook();
-const route = useRoute();
 const sysStore = useSysStore();
-const routes = sysStore.init.staticRoutes;
-
-// // 初始化页面刷新保证当前路由tabview存在
-// let stop = watchEffect(() => {
-//   let parentPath = route.path.slice(0, route.path.lastIndexOf("/"));
-//   dynamicRouteTags(route.path, parentPath);
-// });
-// setTimeout(() => {
-//   // 监听只执行一次，但获取不到当前路由，需要下一个事件轮询中取消监听
-//   stop();
-// }, 0);
 </script>
 
 <style scoped lang="scss">

@@ -17,12 +17,13 @@
   },
   "menu": {
     "t1": "Home Page",
-    "t2": "Goods",
+    "t2": "Goods List",
     "t3": "Product list",
     "t4": "Commodity type",
     "t5": "Add goods",
     "t6": "System",
-    "t7": "Icon"
+    "t7": "Icon",
+    "t8": "Goods"
   },
   "page": {
     "t1": "Go to internal page",

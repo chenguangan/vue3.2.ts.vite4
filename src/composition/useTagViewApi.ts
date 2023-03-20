@@ -1,4 +1,4 @@
-import { reactive } from "vue";
+import { reactive,computed } from "vue";
 import staticRoutes from "@/router/staticRoutes";
 import { useRouter, useRoute } from "vue-router";
 
@@ -68,9 +68,9 @@ export function useTagsViewHook() {
   /**
    * @return 获取当前激活路由对象
    */
-  function getCurrent() {
+  const getCurrent = computed(()=>{
     return tags.routers.filter((v) => v.path === route.path);
-  }
+  }) 
 
   return {
     tags, // 动态路由

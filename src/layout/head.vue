@@ -19,10 +19,10 @@
             <el-breadcrumb-item :to="{ path: '/' }">{{
               $t("menu.t1")
             }}</el-breadcrumb-item>
-            <el-breadcrumb-item v-if="getCurrent()[0].path != '/'">{{
-              getCurrent()[0].lang
-                ? $t(getCurrent()[0].lang)
-                : getCurrent()[0].name
+            <el-breadcrumb-item v-if="getCurrent.length && getCurrent[0].path != '/'">{{
+              getCurrent[0].lang
+                ? $t(getCurrent[0].lang)
+                : getCurrent[0].name
             }}</el-breadcrumb-item>
           </el-breadcrumb>
         </div>
@@ -98,7 +98,7 @@ import { useI18n } from "vue-i18n";
 import { useSysStore } from "@/store/sys";
 import { useDark } from "@vueuse/core";
 import { useRouter } from "vue-router";
-import themeColor from "./components/themeColor.vue";
+import themeColor from "./components/theme-color.vue";
 import { useTagsViewHook } from "@/composition/useTagViewApi";
 
 const { getCurrent } = useTagsViewHook();

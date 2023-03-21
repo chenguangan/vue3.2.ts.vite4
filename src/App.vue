@@ -13,12 +13,12 @@ import en from "element-plus/dist/locale/en.mjs";
 import { useSysStore } from "@/store/sys";
 
 const sysStore = useSysStore();
-const locale = computed(() => (sysStore.init.language === "zh-CN" ? zhCn : en));
+const locale = computed(() => (sysStore.language === "zh-CN" ? zhCn : en));
 </script>
 
 <style lang="scss">
 @import "@/assets/iconfont/iconfont.css";
-@import "@/assets/public.scss";
+@import "@/assets/public.css";
 
 html.dark {
   body {

@@ -28,4 +28,11 @@ export default defineConfig({
       },
     },
   },
+  // css:{
+  //   preprocessorOptions:{
+  //     scss:{
+  //       additionalData: `@use "@/assets/public.scss" as *;`
+  //     }
+  //   }
+  // }
 });

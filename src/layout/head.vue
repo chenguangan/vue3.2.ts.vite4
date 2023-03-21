@@ -1,17 +1,21 @@
 <template>
   <!-- 头部 -->
-  <div class="header flex">
+  <div
+    class="header flex"
+    :class="{
+      false: isCollapse,
+    }"
+  >
     <!-- logo -->
-    <div class="c1">AN-admin</div>
+    <div class="c1">
+      {{ isCollapse ? "AN" : "AN-admin" }}
+    </div>
 
     <!-- 面包屑 -->
     <div class="c2 flex">
       <div class="c3 flex">
-        <div
-          class="b1"
-          @click="sysStore.init.isCollapse = !sysStore.init.isCollapse"
-        >
-          <i class="custom-icon" v-if="sysStore.init.isCollapse">&#xe622;</i>
+        <div class="b1" @click="isCollapse = !isCollapse">
+          <i class="custom-icon" v-if="isCollapse">&#xe622;</i>
           <i class="custom-icon" v-else>&#xe624;</i>
         </div>
         <div class="b2">
@@ -19,11 +23,12 @@
             <el-breadcrumb-item :to="{ path: '/' }">{{
               $t("menu.t1")
             }}</el-breadcrumb-item>
-            <el-breadcrumb-item v-if="getCurrent.length && getCurrent[0].path != '/'">{{
-              getCurrent[0].lang
-                ? $t(getCurrent[0].lang)
-                : getCurrent[0].name
-            }}</el-breadcrumb-item>
+            <el-breadcrumb-item
+              v-if="getCurrent.length && getCurrent[0].path != '/'"
+              >{{
+                getCurrent[0].lang ? $t(getCurrent[0].lang) : getCurrent[0].name
+              }}</el-breadcrumb-item
+            >
           </el-breadcrumb>
         </div>
       </div>
@@ -58,7 +63,7 @@
               <div style="margin-bottom: 10px">
                 <el-button
                   style="width: 100%"
-                  :type="sysStore.init.language == 'zh-CN' ? 'primary' : ''"
+                  :type="language == 'zh-CN' ? 'primary' : ''"
                   @click="switchLang('zh-CN')"
                   >{{ $t("sys.t7") }}</el-button
                 >
@@ -66,7 +71,7 @@
               <div>
                 <el-button
                   style="width: 100%"
-                  :type="sysStore.init.language == 'en' ? 'primary' : ''"
+                  :type="language == 'en' ? 'primary' : ''"
                   @click="switchLang('en')"
                   >{{ $t("sys.t8") }}</el-button
                 >
@@ -93,7 +98,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { toRefs } from "vue";
 import { useI18n } from "vue-i18n";
 import { useSysStore } from "@/store/sys";
 import { useDark } from "@vueuse/core";
@@ -105,11 +110,13 @@ const { getCurrent } = useTagsViewHook();
 
 const isDark = useDark();
 const router = useRouter();
-const sysStore = useSysStore();
+
+const { isCollapse, language } = toRefs(useSysStore());
+
 const { locale } = useI18n();
 
 const switchLang = (lang: string) => {
-  sysStore.init.language = lang;
+  language.value = lang;
   locale.value = lang;
   localStorage.setItem("lang", lang);
 };
@@ -131,6 +138,13 @@ function loginOut() {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   z-index: 9;
   justify-content: space-between;
+  &.false {
+    .c1 {
+      width: 64px;
+      padding: 0;
+      text-align: center;
+    }
+  }
   .c1 {
     font-size: 26px;
     padding-left: 20px;
@@ -189,5 +203,21 @@ function loginOut() {
 }
 :deep(.el-menu) {
   border: none;
+}
+
+@media screen and (max-width: 640px) {
+  .header {
+    .c1 {
+      display: none;
+    }
+    .c3 {
+      .b1 {
+        padding: 0 20px;
+      }
+      .b2 {
+        display: none;
+      }
+    }
+  }
 }
 </style>

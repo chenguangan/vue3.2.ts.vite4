@@ -1,14 +1,8 @@
 <template>
   <!-- 左边 -->
-  <div
-    class="left"
-    :class="{
-      flase: sysStore.init.isCollapse,
-    }"
-  >
+  <div class="left">
     <el-menu
-      class="c1"
-      :collapse="sysStore.init.isCollapse"
+      :collapse="isCollapse"
       :collapse-transition="false"
       router
       active-text-color="var(--el-color-primary)"
@@ -16,25 +10,38 @@
       :default-active="$route.path"
       @select="setMenu"
       text-color="#fff"
-      :default-openeds="['/goods']"
+      :default-openeds="defaultOpeneds"
     >
-      <subMenu :item="routes"/>
+      <subMenu :item="staticRoutes" />
     </el-menu>
   </div>
 </template>
 
 <script setup lang="ts">
+import { watch, toRefs } from "vue";
 import { useSysStore } from "@/store/sys";
 import { useTagsViewHook } from "@/composition/useTagViewApi";
 import subMenu from "./components/sub-menu.vue";
-const sysStore = useSysStore();
+import { useWindowSize } from "@vueuse/core";
+
+const { isCollapse, staticRoutes, menuWidth } = toRefs(useSysStore());
+
 const { setMenu } = useTagsViewHook();
-const routes = sysStore.init.staticRoutes;
+
+const defaultOpeneds = ["/goods"]; //默认展开的菜单
+
+const { width } = useWindowSize();//获取窗口宽度
+
+isCollapse.value = width.value < 1200;//宽度小于1200 自动折叠菜单
+
+watch(width, (newVal, oldVal) => {
+  isCollapse.value = newVal < 1200;
+});
 </script>
 
 <style scoped lang="scss">
 .left {
-  width: 200px;
+  width: v-bind(menuWidth);
   height: calc(100vh - 48px);
   background: #20222a;
   position: fixed;
@@ -44,8 +51,8 @@ const routes = sysStore.init.staticRoutes;
   transition: 0.3s;
   box-sizing: border-box;
 
-  &.flase {
-    width: auto;
+  .el-menu {
+    border: none;
   }
 }
 </style>

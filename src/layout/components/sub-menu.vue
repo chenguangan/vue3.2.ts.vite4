@@ -71,10 +71,7 @@ defineProps({
   top: -1px;
 }
 
-.c1 {
-  border: none;
-  .el-menu-item.is-active {
-    background: #000;
-  }
+.el-menu-item.is-active {
+  background: #000;
 }
 </style>

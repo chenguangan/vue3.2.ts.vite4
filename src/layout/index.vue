@@ -1,9 +1,9 @@
 <template>
   <an-head />
   <div
-    class="index-page"
+    class="content-box"
     :class="{
-      false: sysStore.init.isCollapse,
+      false: sysStore.isCollapse,
     }"
   >
     <an-menu />
@@ -42,7 +42,7 @@ const sysStore = useSysStore();
 </script>
 
 <style scoped lang="scss">
-.index-page {
+.content-box {
   z-index: 9;
   height: calc(100vh - 48px);
   // background: #f6f6f6;
@@ -64,7 +64,7 @@ const sysStore = useSysStore();
       padding: 10px;
     }
     .b3 {
-      background: #fcfcfc;
+      background: var(--el-bg-color);
       padding: 10px;
       border-radius: 5px;
     }
@@ -74,11 +74,9 @@ const sysStore = useSysStore();
 html.dark {
   .c1 {
     .b1 {
-      background: #000;
+      background: #333;
     }
-    .b3 {
-      background: #222;
-    }
+
   }
 }
 

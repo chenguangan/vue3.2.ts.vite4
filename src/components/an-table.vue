@@ -57,7 +57,7 @@ html.dark {
 </template>
 
 <script lang="ts" setup>
-import { useSlots, defineProps, computed, defineEmits } from "vue";
+import { useSlots, computed } from "vue";
 
 const emit = defineEmits(["getChecked"]);
 

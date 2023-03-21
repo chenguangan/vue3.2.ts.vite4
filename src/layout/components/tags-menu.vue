@@ -3,22 +3,24 @@
   时间：2023年03月01日 14:28:46
 -->
 <template>
-  <div class="tags-menu flex">
-    <div
-      class="v1 flex"
-      :class="{
-        true: $route.path === v.path,
-      }"
-      v-for="(v, i) in tags.routers"
-      :kye="i"
-      @click="goTagRouter(v, i)"
-    >
-      {{ v.lang?$t(v.lang):v.name }}
-      <div class="i" @click.stop="deleteTag(v, $route.path)">
-        <i class="custom-icon custom-icon-guanbi1"></i>
+  <el-scrollbar>
+    <div class="tags-menu flex">
+      <div
+        class="v1 flex"
+        :class="{
+          true: $route.path === v.path,
+        }"
+        v-for="(v, i) in tags.routers"
+        :kye="i"
+        @click="goTagRouter(v, i)"
+      >
+        {{ v.lang ? $t(v.lang) : v.name }}
+        <div class="i" @click.stop="deleteTag(v, $route.path)">
+          <i class="custom-icon custom-icon-guanbi1"></i>
+        </div>
       </div>
     </div>
-  </div>
+  </el-scrollbar>
 </template>
 
 <script lang="ts" setup>
@@ -47,14 +49,16 @@ setTimeout(() => {
   padding: 2px;
   color: #555;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), 0 0 2px rgba(0, 0, 0, 0.04);
-  position: relative;
   z-index: 9;
+  flex-wrap: nowrap;
   .v1 {
+    flex-shrink: 0;
     line-height: 20px;
     padding: 0 8px 0 10px;
     border: 1px solid #ddd;
     margin-right: 3px;
     cursor: pointer;
+    width: auto;
     &.true {
       background: var(--el-color-primary);
       color: #fff;
@@ -90,7 +94,7 @@ html.dark {
     color: #999;
     .v1 {
       border-color: #555;
-      &.true{
+      &.true {
         border-color: var(--el-color-primary);
       }
       .i {

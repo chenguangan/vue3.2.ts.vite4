@@ -5,7 +5,7 @@
     <div
       class="footer flex"
       :class="{
-        false: sysStore.init.isCollapse,
+        false: sysStore.isCollapse,
       }"
     >
       <el-button type="primary" @click="emit('subForm')">确定</el-button>

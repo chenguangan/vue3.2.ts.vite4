@@ -17,6 +17,7 @@
       <vue-ueditor-wrap
         @before-init="addCustomButton"
         v-model="content"
+        :key="widthKey"
         :config="editorConfig"
         forceInit
         @ready="ready"
@@ -28,18 +29,25 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineEmits } from "vue";
+import { ref } from "vue";
 import list from "./template";
 import config from "@/common/config";
+import { useWindowSize,debouncedWatch  } from "@vueuse/core";
 
 const emit = defineEmits(["selectImg"]); //自定义事件
 const content = ref("");
 const editorObj = ref<any>(null);
 
+const { width } = useWindowSize();
+const widthKey = ref(1);
+debouncedWatch(width,()=>{
+  widthKey.value += 1; 
+},{debounce:500})
+
+
 const ready = (editorInstance: any) => {
   editorObj.value = editorInstance;
 };
-
 
 //自定义插图图片按钮
 const addCustomButton = (editorId: any) => {

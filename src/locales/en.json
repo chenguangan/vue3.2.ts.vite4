@@ -29,12 +29,21 @@
     "t1": "Go to internal page",
     "t2": "Click ",
     "t3": "Switch page, keep the status of number addition",
-    "t4": "",
-    "t5": "",
-    "t6": "",
-    "t7": "",
-    "t8": "",
-    "t9": "",
-    "t10": ""
+    "t4": "Does not participate in the routing of the menu, and does not exist in the left menu, nor does it exist in the header tag",
+    "t5": "Page Cache",
+    "t6": "Throttling - only executed once in 1 second",
+    "t7": "Number of clicks",
+    "t8": "The number of times the program actually processed",
+    "t9": "Quick click",
+    "t10": "Anti shake",
+    "t11": "Copy function",
+    "t12": "Contents copied",
+    "t13": "What needs to be copied",
+    "t14": "Copy text",
+    "t15": "Replication succeeded",
+    "t16": "Dynamically loading script",
+    "t17": "Your browser does not support the clipboard API"
   }
 }
+
+

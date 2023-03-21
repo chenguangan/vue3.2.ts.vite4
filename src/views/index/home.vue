@@ -3,14 +3,14 @@
     <!-- 内部页面演示 -->
     <div class="c1">
       <el-divider content-position="left">
-        不参与Menu的路由,左侧menu中没有，也不会在头部标签中存在
+        {{ $t("page.t4") }}
       </el-divider>
       <router-link to="/test">{{ $t("page.t1") }}</router-link>
     </div>
 
     <!-- 页面缓存 -->
     <div class="c1">
-      <el-divider content-position="left">页面缓存</el-divider>
+      <el-divider content-position="left">{{ $t("page.t5") }}</el-divider>
       <div class="flex">
         <div class="mr-10">{{ $t("page.t3") }}：{{ num }}</div>
         <el-button @click="num++">{{ $t("page.t2") }}++</el-button>
@@ -19,11 +19,11 @@
 
     <!-- 节流 -->
     <div class="c1">
-      <el-divider content-position="left">节流 - 1秒内只执行一次</el-divider>
+      <el-divider content-position="left">{{ $t("page.t6") }}</el-divider>
       <div class="flex">
-        <div>点击的次数：{{ throttle.clidkDdata }}</div>
+        <div>{{ $t("page.t7") }}：{{ throttle.clidkDdata }}</div>
         <div style="margin: 0 20px">
-          程序实际处理的次数：{{ throttle.upData }}
+          {{ $t("page.t8") }}：{{ throttle.upData }}
         </div>
         <el-button
           @click="
@@ -31,21 +31,18 @@
             throttleFn();
           "
         >
-          快速点击
+          {{ $t("page.t9") }}
         </el-button>
       </div>
     </div>
 
     <!-- 防抖 -->
     <div class="c1">
-      <el-divider content-position="left"
-        >防抖 -
-        1秒内，无论点了多少次，只有某一次点击后在1秒内没有再操作，这一次才被判定有效</el-divider
-      >
+      <el-divider content-position="left">{{ $t("page.t10") }}</el-divider>
       <div class="flex">
-        <div>点击的次数：{{ debounce.clidkDdata }}</div>
+        <div>{{ $t("page.t7") }}：{{ debounce.clidkDdata }}</div>
         <div style="margin: 0 20px">
-          程序实际处理的次数：{{ debounce.upData }}
+          {{ $t("page.t8") }}：{{ debounce.upData }}
         </div>
         <el-button
           @click="
@@ -53,35 +50,34 @@
             debounceFn();
           "
         >
-          快速点击
+        {{ $t("page.t9") }}
         </el-button>
       </div>
     </div>
 
     <!-- 复制功能 -->
     <div class="c1">
-      <el-divider content-position="left">复制功能</el-divider>
+      <el-divider content-position="left">{{ $t("page.t11") }}</el-divider>
       <div v-if="isSupported">
-        <div class="mb-10">复制的内容：{{ text }}</div>
+        <div class="mb-10">{{ $t("page.t12") }}：{{ text }}</div>
         <div class="flex">
-          <div>需要复制的内容：</div>
+          <div>{{ $t("page.t13") }}：</div>
           <div>
             <el-input type="text" v-model="copyText" />
           </div>
           <el-button @click="copy(copyText)">
-            <span v-if="!copied">复制文字</span> <span v-else>复制成功</span>
+            <span v-if="!copied">{{ $t("page.t14") }}</span> <span v-else>{{ $t("page.t15") }}</span>
           </el-button>
         </div>
       </div>
-      <div v-else>您的浏览器不支持剪贴板API</div>
+      <div v-else>{{ $t("page.t17") }}</div>
     </div>
 
     <!-- 动态加载script -->
     <div class="c1">
-      <el-divider content-position="left">动态加载script</el-divider>
+      <el-divider content-position="left">{{ $t("page.t16") }}</el-divider>
       <div id="container"></div>
     </div>
-    
   </div>
 </template>
 

@@ -43,13 +43,17 @@ setTimeout(() => {
 </script>
 
 <style scoped lang="scss">
+.el-scrollbar{
+  position: relative;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), 0 0 2px rgba(0, 0, 0, 0.04);
+  z-index: 9;
+}
 .tags-menu {
   font-size: 13px;
   background: #fff;
   padding: 2px;
   color: #555;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), 0 0 2px rgba(0, 0, 0, 0.04);
-  z-index: 9;
+
   flex-wrap: nowrap;
   .v1 {
     flex-shrink: 0;

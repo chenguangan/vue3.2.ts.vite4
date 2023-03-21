@@ -3,7 +3,7 @@
   时间：2023年02月27日 09:25:55
 -->
 <template>
-  <div>
+  <div class="page-bg">
     <ul class="icon_lists dib-box">
       <li class="dib">
         <span class="icon custom-icon">&#xe6f0;</span>

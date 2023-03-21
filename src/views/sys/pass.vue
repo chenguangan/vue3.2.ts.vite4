@@ -3,7 +3,7 @@
   时间：2023年02月24日 18:11:29
 -->
 <template>
-  <div class="root" ref="rootRef">
+  <div class="page-bg">
     <div class="c1">
       <div class="c6">更改管理员登录密码</div>
       <div class="c7">修改成功后,下次登录生效！</div>
@@ -230,7 +230,7 @@ const subPass = () => {
 </script>
 
 <style scoped lang="scss">
-.root {
+.page-bg {
   overflow: hidden;
   position: relative;
 

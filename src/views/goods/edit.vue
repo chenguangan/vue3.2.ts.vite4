@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page-bg">
     <editPage @subForm="subForm">
       <div class="item">
         <div class="label">标题:</div>

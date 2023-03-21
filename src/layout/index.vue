@@ -12,21 +12,19 @@
       <tags-menu />
       <el-scrollbar class="b1">
         <div class="b2">
-          <div class="b3">
-            <router-view v-slot="{ Component, route }">
-              <transition name="fade-transform" mode="out-in">
-                <keep-alive :include="['home','GoodsEdit','Icon']">
-                  <component :is="Component" :key="route.fullPath" />
-                </keep-alive>
-              </transition>
-            </router-view>
-            <el-backtop
-              :right="50"
-              :bottom="100"
-              z-index="999999"
-              target=".c1 .el-scrollbar__wrap"
-            />
-          </div>
+          <router-view v-slot="{ Component, route }">
+            <transition name="fade-transform" mode="out-in">
+              <keep-alive :include="['home', 'GoodsEdit', 'Icon']">
+                <component :is="Component" :key="route.fullPath" />
+              </keep-alive>
+            </transition>
+          </router-view>
+          <el-backtop
+            :right="50"
+            :bottom="100"
+            z-index="999999"
+            target=".c1 .el-scrollbar__wrap"
+          />
         </div>
       </el-scrollbar>
     </div>
@@ -63,11 +61,6 @@ const sysStore = useSysStore();
     .b2 {
       padding: 10px;
     }
-    .b3 {
-      background: var(--el-bg-color);
-      padding: 10px;
-      border-radius: 5px;
-    }
   }
 }
 
@@ -76,7 +69,6 @@ html.dark {
     .b1 {
       background: #333;
     }
-
   }
 }
 

@@ -1,83 +1,101 @@
 <template>
-  <div ref="scrollRef">
-    <!-- 内部页面演示 -->
-    <div class="c1">
-      <el-divider content-position="left">
-        {{ $t("page.t4") }}
-      </el-divider>
-      <router-link to="/test">{{ $t("page.t1") }}</router-link>
-    </div>
-
-    <!-- 页面缓存 -->
-    <div class="c1">
-      <el-divider content-position="left">{{ $t("page.t5") }}</el-divider>
-      <div class="flex">
-        <div class="mr-10">{{ $t("page.t3") }}：{{ num }}</div>
-        <el-button @click="num++">{{ $t("page.t2") }}++</el-button>
-      </div>
-    </div>
-
-    <!-- 节流 -->
-    <div class="c1">
-      <el-divider content-position="left">{{ $t("page.t6") }}</el-divider>
-      <div class="flex">
-        <div>{{ $t("page.t7") }}：{{ throttle.clidkDdata }}</div>
-        <div style="margin: 0 20px">
-          {{ $t("page.t8") }}：{{ throttle.upData }}
+  <div>
+    <el-row :gutter="10">
+      <el-col :lg="24" :xl="14">
+        <!-- 链接 -->
+        <div class="c1 page-bg">
+          <el-divider content-position="left">链接~</el-divider>
+          <el-link
+            href="https://gitee.com/chenguangan/vue3.2.ts.vite4"
+            target="_blank"
+            >本框架gitee仓库地址</el-link
+          >
         </div>
-        <el-button
-          @click="
-            throttle.clidkDdata += 1;
-            throttleFn();
-          "
-        >
-          {{ $t("page.t9") }}
-        </el-button>
-      </div>
-    </div>
 
-    <!-- 防抖 -->
-    <div class="c1">
-      <el-divider content-position="left">{{ $t("page.t10") }}</el-divider>
-      <div class="flex">
-        <div>{{ $t("page.t7") }}：{{ debounce.clidkDdata }}</div>
-        <div style="margin: 0 20px">
-          {{ $t("page.t8") }}：{{ debounce.upData }}
+        <!-- 内部页面演示 -->
+        <div class="c1 page-bg">
+          <el-divider content-position="left">{{ $t("page.t4") }}</el-divider>
+          <el-link @click="router.push('/test')">{{ $t("page.t1") }}</el-link>
         </div>
-        <el-button
-          @click="
-            debounce.clidkDdata += 1;
-            debounceFn();
-          "
-        >
-        {{ $t("page.t9") }}
-        </el-button>
-      </div>
-    </div>
 
-    <!-- 复制功能 -->
-    <div class="c1">
-      <el-divider content-position="left">{{ $t("page.t11") }}</el-divider>
-      <div v-if="isSupported">
-        <div class="mb-10">{{ $t("page.t12") }}：{{ text }}</div>
-        <div class="flex">
-          <div>{{ $t("page.t13") }}：</div>
-          <div>
-            <el-input type="text" v-model="copyText" />
+        <!-- 页面缓存 -->
+        <div class="c1 page-bg">
+          <el-divider content-position="left">{{ $t("page.t5") }}</el-divider>
+          <div class="flex">
+            <div class="mr-10">{{ $t("page.t3") }}：{{ num }}</div>
+            <el-button @click="num++" type="primary"
+              >{{ $t("page.t2") }}++</el-button
+            >
           </div>
-          <el-button @click="copy(copyText)">
-            <span v-if="!copied">{{ $t("page.t14") }}</span> <span v-else>{{ $t("page.t15") }}</span>
-          </el-button>
         </div>
-      </div>
-      <div v-else>{{ $t("page.t17") }}</div>
-    </div>
 
-    <!-- 动态加载script -->
-    <div class="c1">
-      <el-divider content-position="left">{{ $t("page.t16") }}</el-divider>
-      <div id="container"></div>
-    </div>
+        <!-- 节流 -->
+        <div class="c1 page-bg">
+          <el-divider content-position="left">{{ $t("page.t6") }}</el-divider>
+          <div class="flex">
+            <div>{{ $t("page.t7") }}：{{ throttle.clidkDdata }}</div>
+            <div style="margin: 0 20px">
+              {{ $t("page.t8") }}：{{ throttle.upData }}
+            </div>
+            <el-button
+              type="primary"
+              @click="
+                throttle.clidkDdata += 1;
+                throttleFn();
+              "
+            >
+              {{ $t("page.t9") }}
+            </el-button>
+          </div>
+        </div>
+
+        <!-- 防抖 -->
+        <div class="c1 page-bg">
+          <el-divider content-position="left">{{ $t("page.t10") }}</el-divider>
+          <div class="flex">
+            <div>{{ $t("page.t7") }}：{{ debounce.clidkDdata }}</div>
+            <div style="margin: 0 20px">
+              {{ $t("page.t8") }}：{{ debounce.upData }}
+            </div>
+            <el-button
+              type="primary"
+              @click="
+                debounce.clidkDdata += 1;
+                debounceFn();
+              "
+            >
+              {{ $t("page.t9") }}
+            </el-button>
+          </div>
+        </div>
+
+        <!-- 复制功能 -->
+        <div class="c1 page-bg">
+          <el-divider content-position="left">{{ $t("page.t11") }}</el-divider>
+          <div v-if="isSupported">
+            <div class="mb-10">{{ $t("page.t12") }}：{{ text }}</div>
+            <div class="flex">
+              <div>{{ $t("page.t13") }}：</div>
+              <div>
+                <el-input type="text" v-model="copyText" />
+              </div>
+              <el-button @click="copy(copyText)" type="primary">
+                <span v-if="!copied">{{ $t("page.t14") }}</span>
+                <span v-else>{{ $t("page.t15") }}</span>
+              </el-button>
+            </div>
+          </div>
+          <div v-else>{{ $t("page.t17") }}</div>
+        </div>
+      </el-col>
+      <el-col :lg="24" :xl="10">
+        <!-- 动态加载script -->
+        <div class="c1 page-bg">
+          <el-divider content-position="left">{{ $t("page.t16") }}</el-divider>
+          <div id="container"></div>
+        </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -89,12 +107,16 @@ export default {
 
 <script setup lang="ts">
 import { ref, reactive } from "vue";
+import { useRouter } from "vue-router";
 import {
   useClipboard,
   useScriptTag,
   useThrottleFn,
   useDebounceFn,
 } from "@vueuse/core";
+
+const router = useRouter();
+
 const num = ref(0);
 
 //复制文本
@@ -185,6 +207,10 @@ useScriptTag(
 <style scoped lang="scss">
 .c1 {
   padding-bottom: 30px;
+  margin-bottom: 10px;
+  .el-link {
+    margin-right: 30px;
+  }
   .mb-10 {
     margin-bottom: 10px;
   }
@@ -195,7 +221,7 @@ useScriptTag(
   /*地图(容器)显示大小*/
   #container {
     width: 100%;
-    height: 260px;
+    height: 50vh;
   }
 }
 

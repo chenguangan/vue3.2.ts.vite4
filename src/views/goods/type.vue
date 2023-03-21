@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="page-bg">
       <anTable :data="tableData" @getChecked="(data:any)=>selectData = data">
 
         <template #action>

@@ -100,7 +100,7 @@ const editorConfig = {
   initialFrameHeight: 510,
   UEDITOR_HOME_URL: config.dev
     ? "/UEditor/"
-    : `${config.baseUrl}vue3vite2/UEditor/`, // 访问 UEditor 静态资源的根路径，可参考常见问题1
+    : `${config.UEditorUrl}`, // 访问 UEditor 静态资源的根路径，可参考常见问题1
   serverUrl: "//www.baidu.com", // 服务端接口（这个地址是我为了方便各位体验文件上传功能搭建的临时接口，请勿在生产环境使用！！！）
   toolbars: [
     [
@@ -153,7 +153,7 @@ const editorConfig = {
 
       "unlink", //取消链接
       "link", //超链接
-      "emotion", //表情
+      // "emotion", //表情
       "spechars", //特殊字符
       "searchreplace", //查询替换
       "anchor", //锚点
